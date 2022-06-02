@@ -38,11 +38,12 @@ The Python3 script requires, in addition to a normal Python3 installation, sever
 * matplotlib
 * numpy
 * powerlaw
-Install them using "pip3 install [package]" or the respective alternative for your version of Python.
+
+Install them using ```pip3 install [package]``` or the respective alternative for your version of Python.
 
 For some functions, the script also needs to be able to call some external programs to do some of the data conversions. In particular:
 * gpsbabel: https://www.gpsbabel.org/
 * zip: e.g., http://infozip.sourceforge.net/
 
 ## Configuration:
-To configure the script, enable the flags create* at the top of the script as needed. Also needs CSV data files (names as specified in the familyFiles list in the script) downloaded from https://www.inaturalist.org/observations/export (if using different files adjust the familyFiles list).
+To configure the script, enable the flags ```create*``` at the top of the script as needed. Also needs CSV data files (names as specified in the ```familyFiles``` list in the script) downloaded from https://www.inaturalist.org/observations/export (if using different files adjust the ```familyFiles``` list).
