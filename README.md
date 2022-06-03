@@ -46,4 +46,7 @@ For some functions, the script also needs to be able to call some external progr
 * zip: e.g., http://infozip.sourceforge.net/
 
 ## Configuration:
-To configure the script, enable the flags ```create*``` at the top of the script as needed. Also needs CSV data files (names as specified in the ```familyFiles``` list in the script) downloaded from https://www.inaturalist.org/observations/export (if using different files adjust the ```familyFiles``` list).
+To configure the script, enable the flags ```create*``` at the top of the script as needed. Also needs CSV data files (names as specified in the ```familyFiles``` list in the script, so rename the ```observations-243682.csv``` (or similar) files from the download to ```family.csv``` for easier association) downloaded from https://www.inaturalist.org/observations/export (if using different files adjust the ```familyFiles``` list).
+
+## Files produced:
+The script produces the visual representations of Fig. 17, 20, 34--36, 68--72. The Motion Plausibility Profiles are separated into the main representation and the respective histogram in two files.
