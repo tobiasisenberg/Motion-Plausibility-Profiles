@@ -5,7 +5,7 @@ This demo accompanies the following journal article. If you use the results in n
 
 Tobias Isenberg, Zujany Salazar, Rafael Blanco, and Catherine Plaisant (2022). Do You Believe Your (Social Media) Data? A Personal Story on Location Data Biases, Errors, and Plausibility as well as their Visualization. IEEE Transactions on Visualization and Computer Graphics, 2022. To appear. https://doi.org/10.1109/10.1109/TVCG.2022.3141605
 
-## Bibtex:
+## Bibtex
 ```@ARTICLE{Isenberg:2022:DYB,
   author      = {Tobias Isenberg and Zujany Salazar and  Rafael Blanco and  Catherine Plaisant},
   title       = {Do You Believe Your (Social Media) Data? A Personal Story on Location Data Biases, Errors, and Plausibility as well as their Visualization},
@@ -21,17 +21,17 @@ Tobias Isenberg, Zujany Salazar, Rafael Blanco, and Catherine Plaisant (2022). D
 }
 ```
 
-## Project website:
+## Project website
 https://tobias.isenberg.cc/VideosAndDemos/Isenberg2022DYB
 
-## Note:
+## Note
 Please note the software is provided "as is".  Use it at your own risk, although data loss is unlikely. Do take the standard precautions like saving your work in other programs.
 
-## License:
+## License
 Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) https://creativecommons.org/licenses/by-sa/4.0/
 (see license.txt).
 
-## Requirements:
+## Requirements
 The Python3 script requires, in addition to a normal Python3 installation, several packages including (potentially more):
 * geopy
 * plotly
@@ -45,8 +45,8 @@ For some functions, the script also needs to be able to call some external progr
 * gpsbabel: https://www.gpsbabel.org/
 * zip: e.g., http://infozip.sourceforge.net/
 
-## Configuration:
+## Configuration
 To configure the script, enable the flags ```create*``` at the top of the script as needed. Also needs CSV data files (names as specified in the ```familyFiles``` list in the script, so rename the ```observations-243682.csv``` (or similar) files from the download to ```family.csv``` for easier association) downloaded from https://www.inaturalist.org/observations/export (if using different files adjust the ```familyFiles``` list).
 
-## Files produced:
+## Files produced
 The script produces the visual representations of Fig. 17, 20, 34--36, 68--72. The Motion Plausibility Profiles are separated into the main representation and the respective histogram in two files.
