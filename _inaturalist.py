@@ -32,43 +32,46 @@ generateColorBlindCompatible = False # if false, then use the regular color mapp
 createPersonVisualizationExcerpts = True # if true, then the Motion Plausibility Profile visualizations are generated for the ppl. mentioned below
 createPersonVisualizationExcerptsWide = True # if true, then the MPPs are more wide than square
 createPersonVisualizationExcerptsHistograms = True # if true, then also export the histogram for each person
+createPersonVisualizationExcerptsWithPredefinedList = False # if true, then use the predefined list below for export, otherwise eport people with >= 80 posts
 
 # specify for which poster to export the Motion Plausibility Profiles (using createPersonVisualizationExcerpts)
-peopleExcerptPlots = [
-    "987073",  # strgzzr: 545
-    "997336",  # cobaltducks: 405
-    "18823",  # ahospers: 344
-    "383144",  # tonyrebelo: 316
-    "388888",  # rfoster: 300
-    "59391",  # a_calidris: 196
-    "222137",  # reiner: 192
-    "31792",  # aaroncarlson: 192
-    "119644",  # rroutledge: 188
-    "970009",  # brandoncorder: 168
-    "578924",  # teresa45: 165
-    "254480",  # bogwalker: 153
-    "64568",  # ericpo1: 127
-    "1829749",  # cclborneo: 126
-    "1195500",  # kg-: 124
-    "705762",  # misspt: 123
-    "14208",  # philiptdotcom: 121
-    "527990",  # vynbos: 120
-    "17401",  # najera_tutor: 117
-    "472267",  # j_appleget: 117
-    "56162",  # janetwright: 112
-    "533871",  # burke_korol: 107
-    "365249",  # petekleinhenz: 103
-    "1371028",  # tropicbreeze: 97
-    "2991",  # sea-kangaroo: 97
-    "875456",  # mcferny: 96
-    "416993",  # umpquamatt: 96
-    "777160",  # stevendaniel: 92
-    "290071",  # nefariousdrru: 89
-    "56498",  # anewman: 88
-    "267179",  # jokurtz: 87
-    "196849",  # questagame: 83
-    "66205",  # neotiki: 80
-    ]
+peopleExcerptPlots = []
+if createPersonVisualizationExcerptsWithPredefinedList:
+    peopleExcerptPlots = [
+        "987073",  # strgzzr: 545
+        "997336",  # cobaltducks: 405
+        "18823",  # ahospers: 344
+        "383144",  # tonyrebelo: 316
+        "388888",  # rfoster: 300
+        "59391",  # a_calidris: 196
+        "222137",  # reiner: 192
+        "31792",  # aaroncarlson: 192
+        "119644",  # rroutledge: 188
+        "970009",  # brandoncorder: 168
+        "578924",  # teresa45: 165
+        "254480",  # bogwalker: 153
+        "64568",  # ericpo1: 127
+        "1829749",  # cclborneo: 126
+        "1195500",  # kg-: 124
+        "705762",  # misspt: 123
+        "14208",  # philiptdotcom: 121
+        "527990",  # vynbos: 120
+        "17401",  # najera_tutor: 117
+        "472267",  # j_appleget: 117
+        "56162",  # janetwright: 112
+        "533871",  # burke_korol: 107
+        "365249",  # petekleinhenz: 103
+        "1371028",  # tropicbreeze: 97
+        "2991",  # sea-kangaroo: 97
+        "875456",  # mcferny: 96
+        "416993",  # umpquamatt: 96
+        "777160",  # stevendaniel: 92
+        "290071",  # nefariousdrru: 89
+        "56498",  # anewman: 88
+        "267179",  # jokurtz: 87
+        "196849",  # questagame: 83
+        "66205",  # neotiki: 80
+        ]
 
 # needs data downloaded from https://www.inaturalist.org/observations/export (one for each entry below in the familyFiles list)
 familyFiles = [ "droseraceae", "nepenthaceae", "sarraceniaceae", "roridulaceae", "byblidaceae", "lentibulariaceae", "cephalotaceae", "drosophyllaceae" ]
@@ -221,8 +224,8 @@ for dataFile in familyFiles:
             # ignore data without genus names (sometimes only the family is recorded)
             if newEntry["taxon_genus_name"] == "":
                 # we only map the monotypic families (only one so far) to their respective genuses
-                if newEntry["scientific_name"] == "Nepenthaceae":
-                    newEntry["taxon_genus_name"] = "Nepenthes"
+                if newEntry["scientific_name"] in ["Nepenthaceae"]: # add more here if needed, so far only seems to be necessary for Nepenthaceae
+                    if newEntry["scientific_name"] == "Nepenthaceae": newEntry["taxon_genus_name"] = "Nepenthes"
                 else:
                     # and ignore the rest
                     print("No genus name for id: " + str(newEntry["id"]), end='')
@@ -230,10 +233,11 @@ for dataFile in familyFiles:
                     continue
 
             # make noise if we have obscured data and private location (for FIXME below)
-            if 'private_latitude' in newEntry.keys():
-                print("++++ FOUND PRIVATE DATA ++++")
-                if newEntry["coordinates_obscured"] == "true":
-                    print("++++ COORDINATES STILL MARKED AS OBSCURED, fix FIXME in clean data export ++++")
+            if createDataExportForVisTool:
+                if 'private_latitude' in newEntry.keys():
+                    print("++++ FOUND PRIVATE DATA ++++")
+                    if newEntry["coordinates_obscured"] == "true":
+                        print("++++ COORDINATES STILL MARKED AS OBSCURED, fix FIXME in clean data export ++++")
 
             # add the new observation to our local list
             iNaturalistData.append(newEntry)
@@ -974,6 +978,8 @@ if createGeneralVisualizations:
     for peoplePosting, postCountCount in sortedPeopleAndPictureCount[::-1]:
         if postCountCount >= 80:
             print("     " + peoplePosting + ": " + str(postCountCount))
+            if createPersonVisualizationExcerptsWithPredefinedList == False:
+                peopleExcerptPlots.append(peoplePosting.split("-")[0])
 
     print("Only " + str(round(float(medianPersonFromTop)*100.0/float(len(peopleAndPictureCount)),1)) + "%% of the people (i.e., " + str(medianPersonFromTop) + ", out of " + str(len(peopleAndPictureCount)) + " total people posting images) are responsible for half (" + str(halfKnownPicturesWithDuplicates) + ") of the images (" + str(pictureCounter) + " images to be precise).")
     print("Posters with N or less images:")
