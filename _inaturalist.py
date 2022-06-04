@@ -24,7 +24,7 @@ import plotly.io as pio
 ############################################################################
 # enable the different export functions by setting the flags to True below #
 ############################################################################
-createDataExportForHeatmap = False # generate CSV data for 
+createDataExportForHeatmap = False # generate CSV data for separate heatmap visualization
 createDataExportForVisTool = False # generate a clean CSV of the data
 createDataExportForGPSTools = False # generate data for GPS tools (GPX, KML, KMZ)
 createGeneralVisualizations = True # produce general/summary visualizations of the data
@@ -32,7 +32,7 @@ generateColorBlindCompatible = False # if false, then use the regular color mapp
 createPersonVisualizationExcerpts = True # if true, then the Motion Plausibility Profile visualizations are generated for the ppl. mentioned below
 createPersonVisualizationExcerptsWide = True # if true, then the MPPs are more wide than square
 createPersonVisualizationExcerptsHistograms = True # if true, then also export the histogram for each person
-createPersonVisualizationExcerptsWithPredefinedList = False # if true, then use the predefined list below for export, otherwise eport people with >= 80 posts
+createPersonVisualizationExcerptsWithPredefinedList = False # if true, then use the predefined list below for export, otherwise export people with >= 80 posts
 
 # specify for which poster to export the Motion Plausibility Profiles (using createPersonVisualizationExcerpts)
 peopleExcerptPlots = []
