@@ -3,7 +3,7 @@
 ## General
 This demo accompanies the following journal article. If you use the results in new projects, create images with it for some future work, or use it in a different way we would appreciate a citation:
 
-Tobias Isenberg, Zujany Salazar, Rafael Blanco, and Catherine Plaisant (2022). Do You Believe Your (Social Media) Data? A Personal Story on Location Data Biases, Errors, and Plausibility as well as their Visualization. IEEE Transactions on Visualization and Computer Graphics, 2022. To appear. doi: [10.1109/TVCG.2022.3141605](https://doi.org/10.1109/TVCG.2022.3141605)
+Tobias Isenberg, Zujany Salazar, Rafael Blanco, and Catherine Plaisant (2022). Do You Believe Your (Social Media) Data? A Personal Story on Location Data Biases, Errors, and Plausibility as well as their Visualization. IEEE Transactions on Visualization and Computer Graphics, 2022. To appear. doi: [10.1109/TVCG.2022.3141605](https://doi.org/10.1109/TVCG.2022.3141605); open-access version available at https://hal.inria.fr/hal-03516682
 
 ## Bibtex
 ```@ARTICLE{Isenberg:2022:DYB,
