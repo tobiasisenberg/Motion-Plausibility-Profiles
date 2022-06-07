@@ -5,7 +5,7 @@ from subprocess import call,check_output
 print("running Python " + sys.version)
 # change to directory of the script
 pathOfTheScript = os.path.dirname(sys.argv[0])
-os.chdir(pathOfTheScript)
+if (len(pathOfTheScript) > 0): os.chdir(pathOfTheScript)
 
 import csv
 import powerlaw
