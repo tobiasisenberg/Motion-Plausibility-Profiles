@@ -43,7 +43,7 @@ The Python3 script requires, in addition to a normal Python3 installation, sever
 
 Install them using ```pip3 install [package]``` or the respective alternative for your version of Python.
 
-For some functions, the script also needs to be able to call some external programs to do some of the data conversions. In particular:
+For some functions (but not in the default configuration), the script also needs to be able to call some external programs to do some of the data conversions. In particular:
 * ```gpsbabel```: https://www.gpsbabel.org/
 * ```zip```: e.g., http://infozip.sourceforge.net/
 
