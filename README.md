@@ -32,6 +32,8 @@ Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) https://creativecommons.
 (see license.txt).
 
 ## Requirements
+
+### Software Requirements
 The Python3 script requires, in addition to a normal Python3 installation, several packages including (potentially more):
 * geopy
 * plotly
@@ -45,8 +47,13 @@ For some functions, the script also needs to be able to call some external progr
 * gpsbabel: https://www.gpsbabel.org/
 * zip: e.g., http://infozip.sourceforge.net/
 
+### Data requirements
+The script requires additional CSV data files (named as specified in the ```familyFiles``` list in the script) downloaded from https://www.inaturalist.org/observations/export (if using different files you need to adjust the ```familyFiles``` list).
+
+For the default configuration, please go to [the iNaturalist export page (may require an iNaturalist login)](https://www.inaturalist.org/observations/export) and download the data files for the taxa ```droseraceae```, ```nepenthaceae```, ```sarraceniaceae```, ```roridulaceae```, ```byblidaceae```, ```lentibulariaceae```, ```cephalotaceae```, and ```drosophyllaceae```. To do so, for each taxon enter the taxon name into the ```taxon``` field on the form, select the suggested family, select ```All``` for ```Geo``` and for ```Taxon``` under point 3, ```Choose columns```, and click ```Create export```. Each export can take a while to generate based on the size of the family (e.g., families ```droseraceae```, ```nepenthaceae```, ```sarraceniaceae```, and ```lentibulariaceae``` are large and can take several hours each). Also note that you can only create one export at a time. Once downloaded, unzip the data and rename the exported ```observations-123456.csv``` (or similar) files from iNaturalist to ```family.csv``` for easier association and to match the name in the script (e.g., ```droseraceae.csv```).
+
 ## Configuration
-To configure the script, adjust the flags ```create*``` at the top of the script as needed (but the script runs with the default configuration out of the box). The cript requires, however, additional CSV data files (named as specified in the ```familyFiles``` list in the script, so rename the exported ```observations-243682.csv``` (or similar) files from iNaturalist to ```family.csv``` for easier association) downloaded from https://www.inaturalist.org/observations/export (if using different files you need to adjust the ```familyFiles``` list).
+To configure the script, adjust the flags ```create*``` at the top of the script as needed (but the script runs with the default configuration out of the box). 
 
 ## Files produced
 The script produces the visual representations of Fig. 17, 20, 34--36, 68--72. The Motion Plausibility Profiles are separated into the main representation and the respective histogram in two files.
