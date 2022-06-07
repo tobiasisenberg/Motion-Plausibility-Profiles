@@ -44,8 +44,8 @@ The Python3 script requires, in addition to a normal Python3 installation, sever
 Install them using ```pip3 install [package]``` or the respective alternative for your version of Python.
 
 For some functions, the script also needs to be able to call some external programs to do some of the data conversions. In particular:
-* gpsbabel: https://www.gpsbabel.org/
-* zip: e.g., http://infozip.sourceforge.net/
+* ```gpsbabel```: https://www.gpsbabel.org/
+* ```zip```: e.g., http://infozip.sourceforge.net/
 
 ### Data requirements
 The script requires additional CSV data files (named as specified in the ```familyFiles``` list in the script) downloaded from https://www.inaturalist.org/observations/export (if using different files you need to adjust the ```familyFiles``` list).
