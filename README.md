@@ -29,7 +29,7 @@ Please note the software is provided "as is".  Use it at your own risk, although
 
 ## License
 Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) https://creativecommons.org/licenses/by-sa/4.0/
-(see license.txt).
+(see [license.txt](license.txt)).
 
 ## Requirements
 
