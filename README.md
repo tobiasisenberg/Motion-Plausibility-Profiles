@@ -56,4 +56,4 @@ For the default configuration, please go to [the iNaturalist export page (may re
 To configure the script, adjust the flags ```create*``` at the top of the script as needed (but the script runs with the default configuration out of the box). 
 
 ## Files produced
-The script produces the visual representations of Fig. 17, 20, 34--36, 68--72. The Motion Plausibility Profiles are separated into the main representation and the respective histogram in two files.
+The script produces the visual representations of Fig. 17, 20, 34–36, and 68–72 of the paper (adjusted to the newly downloaded data). The Motion Plausibility Profiles are separated into the main representation and the respective histogram in two files.
