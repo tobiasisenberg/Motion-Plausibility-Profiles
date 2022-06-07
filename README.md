@@ -35,11 +35,11 @@ Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) https://creativecommons.
 
 ### Software Requirements
 The Python3 script requires, in addition to a normal Python3 installation, several packages including (potentially more):
-* geopy
-* plotly
-* matplotlib
-* numpy
-* powerlaw
+* ```geopy```
+* ```plotly```
+* ```matplotlib```
+* ```numpy```
+* ```powerlaw```
 
 Install them using ```pip3 install [package]``` or the respective alternative for your version of Python.
 
