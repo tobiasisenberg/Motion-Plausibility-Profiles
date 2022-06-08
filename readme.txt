@@ -2,7 +2,7 @@ General
 =======
 This demo accompanies the following journal article. If you use the results in new projects, create images with it for some future work, or use it in a different way we would appreciate a citation:
 
-Tobias Isenberg, Zujany Salazar, Rafael Blanco, and Catherine Plaisant (2022). Do You Believe Your (Social Media) Data? A Personal Story on Location Data Biases, Errors, and Plausibility as well as their Visualization. IEEE Transactions on Visualization and Computer Graphics, 2022. To appear. https://doi.org/10.1109/10.1109/TVCG.2022.3141605
+Tobias Isenberg, Zujany Salazar, Rafael Blanco, and Catherine Plaisant (2022). Do You Believe Your (Social Media) Data? A Personal Story on Location Data Biases, Errors, and Plausibility as well as their Visualization. IEEE Transactions on Visualization and Computer Graphics, 2022. To appear. https://doi.org/10.1109/TVCG.2022.3141605
 
 Bibtex:
 =======
@@ -11,8 +11,8 @@ Bibtex:
   title       = {Do You Believe Your (Social Media) Data? A Personal Story on Location Data Biases, Errors, and Plausibility as well as their Visualization},
   journal     = {IEEE Transactions on Visualization and Computer Graphics},
   year        = {2022},
-  doi         = {10.1109/10.1109/TVCG.2022.3141605},
-  doi_url     = {https://doi.org/10.1109/10.1109/TVCG.2022.3141605},
+  doi         = {10.1109/TVCG.2022.3141605},
+  doi_url     = {https://doi.org/10.1109/TVCG.2022.3141605},
   oa_hal_url  = {https://hal.inria.fr/hal-03516682},
   osf_url     = {https://osf.io/u8ejr/},
   url         = {https://tobias.isenberg.cc/VideosAndDemos/Isenberg2022DYB},
@@ -30,7 +30,7 @@ Please note the software is provided "as is".  Use it at your own risk, although
 
 License:
 ========
-Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) https://creativecommons.org/licenses/by-sa/4.0/
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) https://creativecommons.org/licenses/by-sa/4.0/
 (see license.txt).
 
 Sodtware Requirements:
@@ -51,7 +51,7 @@ Data Requirements:
 ==================
 The script requires additional CSV data files (named as specified in the familyFiles list in the script) downloaded from https://www.inaturalist.org/observations/export (if using different files you need to adjust the familyFiles list).
 
-For the default configuration, please go to the iNaturalist export page (may require an iNaturalist login) and download the data files for the taxa droseraceae, nepenthaceae, sarraceniaceae, roridulaceae, byblidaceae, lentibulariaceae, cephalotaceae, and drosophyllaceae. To do so, for each taxon enter the taxon name into the taxon field on the form, select the suggested family, select All for Geo and for Taxon under point 3, Choose columns, and click Create export. Each export can take a while to generate based on the size of the family (e.g., families droseraceae, nepenthaceae, sarraceniaceae, and lentibulariaceae are large and can take several hours each). Also note that you can only create one export at a time. Once downloaded, unzip the data and rename the exported observations-123456.csv (or similar) files from iNaturalist to family.csv for easier association and to match the name in the script (e.g., droseraceae.csv).
+For the default configuration, please go to the iNaturalist export page (https://www.inaturalist.org/observations/export ; may require an iNaturalist login) and download the data files for the taxa droseraceae, nepenthaceae, sarraceniaceae, roridulaceae, byblidaceae, lentibulariaceae, cephalotaceae, and drosophyllaceae. To do so, for each taxon enter the taxon name into the taxon field on the form, select the suggested family in the pop-up that appears, select All for Geo and for Taxon under Point 3 (Choose columns), and then click the Create export button at the bottom of the page. Each export can take a while to generate based on the size of the family (e.g., families droseraceae, nepenthaceae, sarraceniaceae, and lentibulariaceae are large and can take several hours each) and you can see the status at the bottom of the export page if you reload it (ask iNaturalist to send you an e-mail with the data once the export is complete). Also note that you can only create one export at a time. Once downloaded, unzip the data and rename the exported observations-123456.csv (or similar) files from iNaturalist to family.csv for easier association and to match the name in the script (e.g., droseraceae.csv).
 
 Configuration:
 ==============

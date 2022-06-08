@@ -21,6 +21,10 @@ import plotly.offline as py
 import plotly.graph_objs as go
 import plotly.io as pio
 
+if (sys.version_info.major < 3):
+    print("This script is called with Python " + str(sys.version_info.major) + ". But it needs at least Python 3, please call it with \"python3\" instead.")
+    sys.exit()
+
 ############################################################################
 # enable the different export functions by setting the flags to True below #
 ############################################################################
@@ -106,144 +110,145 @@ numberOfPrivateObservationsWoGeo = 0
 
 for dataFile in familyFiles:
     dataFileName = dataFile + ".csv"
-    with open(dataFileName, 'r', encoding='utf-8') as csvfile:
-        # id, -> Unique identifier for the observation
-        # observed_on_string, -> Date/time as entered by the observer
-        # observed_on, -> Normalized date of observation
-        # time_observed_at, -> Normalized datetime of observation
-        # time_zone, -> Time zone of observation ################### could be a measure of accuracy, local time ###################
-        # out_of_range, -> Whether or not this observation lies outside the taxon's known range
-        # user_id, -> Unique identifier for the observer
-        # user_login, -> Username of the observer
-        # created_at, -> Datetime observation was created
-        # updated_at, -> Datetime observation was last updated
+    if os.path.isfile(dataFileName):
+        with open(dataFileName, 'r', encoding='utf-8') as csvfile:
+            # id, -> Unique identifier for the observation
+            # observed_on_string, -> Date/time as entered by the observer
+            # observed_on, -> Normalized date of observation
+            # time_observed_at, -> Normalized datetime of observation
+            # time_zone, -> Time zone of observation ################### could be a measure of accuracy, local time ###################
+            # out_of_range, -> Whether or not this observation lies outside the taxon's known range
+            # user_id, -> Unique identifier for the observer
+            # user_login, -> Username of the observer
+            # created_at, -> Datetime observation was created
+            # updated_at, -> Datetime observation was last updated
 
-        # quality_grade, -> Quality grade of this observation. See Help section for details on what this means:
-        # "research", "needs_id", "casual"
+            # quality_grade, -> Quality grade of this observation. See Help section for details on what this means:
+            # "research", "needs_id", "casual"
 
-        # license, -> License the observer has chosen for this observation
-        # url, -> URL for the observation
-        # image_url, -> URL for the default image
-        # sound_url, -> URL for the default sound. Note this will only work for direct uploads, not sounds hosted on 3rd-party services
-        # tag_list, -> Comma-separated list of tags
-        # description,
-        # id_please, -> Whether or not the observer requested ID help
-        # num_identification_agreements, -> Number of identifications in concurrence with the observer's identification
-        # num_identification_disagreements, -> Number of identifications conflicting with the observer's identification
-        # captive_cultivated,
-        # oauth_application_id,
-        # place_guess, -> Locality description as entered by the observer
-        # latitude, -> Publicly visible latitude
-        # longitude, -> Publicly visible longitude
-        # positional_accuracy, -> Coordinate precision (yeah, yeah, accuracy != precision, poor choice of names)
-        # private_place_guess,
-        # private_latitude, -> Private latitude, set if observation private or obscured
-        # private_longitude, -> Private longitude, set if observation private or obscured
-        # private_positional_accuracy,
+            # license, -> License the observer has chosen for this observation
+            # url, -> URL for the observation
+            # image_url, -> URL for the default image
+            # sound_url, -> URL for the default sound. Note this will only work for direct uploads, not sounds hosted on 3rd-party services
+            # tag_list, -> Comma-separated list of tags
+            # description,
+            # id_please, -> Whether or not the observer requested ID help
+            # num_identification_agreements, -> Number of identifications in concurrence with the observer's identification
+            # num_identification_disagreements, -> Number of identifications conflicting with the observer's identification
+            # captive_cultivated,
+            # oauth_application_id,
+            # place_guess, -> Locality description as entered by the observer
+            # latitude, -> Publicly visible latitude
+            # longitude, -> Publicly visible longitude
+            # positional_accuracy, -> Coordinate precision (yeah, yeah, accuracy != precision, poor choice of names)
+            # private_place_guess,
+            # private_latitude, -> Private latitude, set if observation private or obscured
+            # private_longitude, -> Private longitude, set if observation private or obscured
+            # private_positional_accuracy,
 
-        # geoprivacy, -> Whether or not the observer has chosen to obscure or hide the coordinates:
-        #  "" (=="open"), "private", "obscured"
+            # geoprivacy, -> Whether or not the observer has chosen to obscure or hide the coordinates:
+            #  "" (=="open"), "private", "obscured"
 
-        # open
-        # Everyone can see the coordinates, unless the taxon geoprivacy is "obscured" or "private". Appears as a
-        #  teardrop-shaped marker.
+            # open
+            # Everyone can see the coordinates, unless the taxon geoprivacy is "obscured" or "private". Appears as a
+            #  teardrop-shaped marker.
 
-        # obscured
-        # Public coordinates are shown as a random point within a 0.2 by 0.2 degree area that contains the true coordinates.
-        # This area works out to about a 22 by 22 kilometer area at the equator, decreasing in size and narrowing as you
-        # approach the poles. The randomized public coordinates appear within the rectangle as a circular marker without
-        # a stem. True coordinates are only visible to you, trusted users, and trusted project curators. iNaturalist Network
-        # organizations, in their respective countries, can view true coordinates for taxa set to automatically obscure,
-        # but they can only view your manually obscured coordinates if you choose to affiliate with the network in your
-        # account settings.
+            # obscured
+            # Public coordinates are shown as a random point within a 0.2 by 0.2 degree area that contains the true coordinates.
+            # This area works out to about a 22 by 22 kilometer area at the equator, decreasing in size and narrowing as you
+            # approach the poles. The randomized public coordinates appear within the rectangle as a circular marker without
+            # a stem. True coordinates are only visible to you, trusted users, and trusted project curators. iNaturalist Network
+            # organizations, in their respective countries, can view true coordinates for taxa set to automatically obscure,
+            # but they can only view your manually obscured coordinates if you choose to affiliate with the network in your
+            # account settings.
 
-        # private
-        # Coordinates are completely hidden from public maps. True coordinates are only visible to you, trusted users, and
-        # trusted project curators. iNaturalist Network organizations, in their respective countries, can view true
-        # coordinates for taxa set to automatically display as private, but they can only view the coordinates of
-        # observations you have manually set to private if you choose to affiliate with the network in your account settings.
+            # private
+            # Coordinates are completely hidden from public maps. True coordinates are only visible to you, trusted users, and
+            # trusted project curators. iNaturalist Network organizations, in their respective countries, can view true
+            # coordinates for taxa set to automatically display as private, but they can only view the coordinates of
+            # observations you have manually set to private if you choose to affiliate with the network in your account settings.
 
-        # taxon_geoprivacy, -> Most conservative geoprivacy applied due to the conservation statuses of taxa in current identification:
-        # "", "obscured", "open"
+            # taxon_geoprivacy, -> Most conservative geoprivacy applied due to the conservation statuses of taxa in current identification:
+            # "", "obscured", "open"
 
-        # coordinates_obscured, -> Whether or not the coordinates have been obscured, either because of geoprivacy or because of a threatened taxon:
-        # "true", "false"
+            # coordinates_obscured, -> Whether or not the coordinates have been obscured, either because of geoprivacy or because of a threatened taxon:
+            # "true", "false"
 
-        # positioning_method, -> How the coordinates were determined
-        # positioning_device, -> Device used to determine coordinates
-        # place_town_name,
-        # place_county_name,
-        # place_state_name,
-        # place_country_name,
-        # place_admin1_name,
-        # place_admin2_name,
-        # species_guess, -> Name the observer entered for the observed taxon
-        # scientific_name, -> Scientific name of the observed taxon according to this site
-        # common_name, -> Common or vernacular name of the observed taxon according to this site
-        # iconic_taxon_name, -> Higher-level taxonomic category for the observed taxon
-        # taxon_id, -> Unique identifier for the observed taxon
-        # taxon_kingdom_name,
-        # taxon_phylum_name,
-        # taxon_subphylum_name,
-        # taxon_superclass_name,
-        # taxon_class_name,
-        # taxon_subclass_name,
-        # taxon_superorder_name,
-        # taxon_order_name,
-        # taxon_suborder_name,
-        # taxon_superfamily_name,
-        # taxon_subfamily_name,
-        # taxon_supertribe_name,
-        # taxon_tribe_name,
-        # taxon_subtribe_name,
-        # taxon_family_name,
-        # taxon_genus_name,
-        # taxon_genushybrid_name,
-        # taxon_species_name,
-        # taxon_hybrid_name,
-        # taxon_subspecies_name,
-        # taxon_variety_name,
-        # taxon_form_name
+            # positioning_method, -> How the coordinates were determined
+            # positioning_device, -> Device used to determine coordinates
+            # place_town_name,
+            # place_county_name,
+            # place_state_name,
+            # place_country_name,
+            # place_admin1_name,
+            # place_admin2_name,
+            # species_guess, -> Name the observer entered for the observed taxon
+            # scientific_name, -> Scientific name of the observed taxon according to this site
+            # common_name, -> Common or vernacular name of the observed taxon according to this site
+            # iconic_taxon_name, -> Higher-level taxonomic category for the observed taxon
+            # taxon_id, -> Unique identifier for the observed taxon
+            # taxon_kingdom_name,
+            # taxon_phylum_name,
+            # taxon_subphylum_name,
+            # taxon_superclass_name,
+            # taxon_class_name,
+            # taxon_subclass_name,
+            # taxon_superorder_name,
+            # taxon_order_name,
+            # taxon_suborder_name,
+            # taxon_superfamily_name,
+            # taxon_subfamily_name,
+            # taxon_supertribe_name,
+            # taxon_tribe_name,
+            # taxon_subtribe_name,
+            # taxon_family_name,
+            # taxon_genus_name,
+            # taxon_genushybrid_name,
+            # taxon_species_name,
+            # taxon_hybrid_name,
+            # taxon_subspecies_name,
+            # taxon_variety_name,
+            # taxon_form_name
 
-        dataReader = csv.reader(csvfile, delimiter=',', quotechar='"')
-        headers = next(dataReader)[0:]
-        for row in dataReader:
-            newEntry = {key: str(value) for key, value in zip(headers, row[0:])}
-            # filter out non-habitats
-            if (newEntry["captive_cultivated"] == "true"): continue
-            # make sure to record each observation only once (just as a safe-guard)
-            if newEntry["id"] in iNaturalistDataIDs: continue
-            # count the number of private entries
-            if (newEntry['geoprivacy'] == "private"):
-                numberOfPrivateObservations += 1
-                if (newEntry["latitude"] == "") or (newEntry["longitude"] == ""):
-                    numberOfPrivateObservationsWoGeo += 1
-            # make sure we only record data with actual coordinates
-            if newEntry["latitude"] == "": continue
-            if newEntry["longitude"] == "": continue
-            # ignore data without genus names (sometimes only the family is recorded)
-            if newEntry["taxon_genus_name"] == "":
-                # we only map the monotypic families (only one so far) to their respective genuses
-                if newEntry["scientific_name"] in ["Nepenthaceae"]: # add more here if needed, so far only seems to be necessary for Nepenthaceae
-                    if newEntry["scientific_name"] == "Nepenthaceae": newEntry["taxon_genus_name"] = "Nepenthes"
-                else:
-                    # and ignore the rest
-                    print("No genus name for id: " + str(newEntry["id"]), end='')
-                    print(" ; scientific name: " + newEntry["scientific_name"])
-                    continue
+            dataReader = csv.reader(csvfile, delimiter=',', quotechar='"')
+            headers = next(dataReader)[0:]
+            for row in dataReader:
+                newEntry = {key: str(value) for key, value in zip(headers, row[0:])}
+                # filter out non-habitats
+                if (newEntry["captive_cultivated"] == "true"): continue
+                # make sure to record each observation only once (just as a safe-guard)
+                if newEntry["id"] in iNaturalistDataIDs: continue
+                # count the number of private entries
+                if (newEntry['geoprivacy'] == "private"):
+                    numberOfPrivateObservations += 1
+                    if (newEntry["latitude"] == "") or (newEntry["longitude"] == ""):
+                        numberOfPrivateObservationsWoGeo += 1
+                # make sure we only record data with actual coordinates
+                if newEntry["latitude"] == "": continue
+                if newEntry["longitude"] == "": continue
+                # ignore data without genus names (sometimes only the family is recorded)
+                if newEntry["taxon_genus_name"] == "":
+                    # we only map the monotypic families (only one so far) to their respective genuses
+                    if newEntry["scientific_name"] in ["Nepenthaceae"]: # add more here if needed, so far only seems to be necessary for Nepenthaceae
+                        if newEntry["scientific_name"] == "Nepenthaceae": newEntry["taxon_genus_name"] = "Nepenthes"
+                    else:
+                        # and ignore the rest
+                        print("No genus name for id: " + str(newEntry["id"]), end='')
+                        print(" ; scientific name: " + newEntry["scientific_name"])
+                        continue
 
-            # make noise if we have obscured data and private location (for FIXME below)
-            if createDataExportForVisTool:
-                if 'private_latitude' in newEntry.keys():
-                    print("++++ FOUND PRIVATE DATA ++++")
-                    if newEntry["coordinates_obscured"] == "true":
-                        print("++++ COORDINATES STILL MARKED AS OBSCURED, fix FIXME in clean data export ++++")
+                # make noise if we have obscured data and private location (for FIXME below)
+                if createDataExportForVisTool:
+                    if 'private_latitude' in newEntry.keys():
+                        print("++++ FOUND PRIVATE DATA ++++")
+                        if newEntry["coordinates_obscured"] == "true":
+                            print("++++ COORDINATES STILL MARKED AS OBSCURED, fix FIXME in clean data export ++++")
 
-            # add the new observation to our local list
-            iNaturalistData.append(newEntry)
-            iNaturalistDataIDs.append(newEntry["id"])
+                # add the new observation to our local list
+                iNaturalistData.append(newEntry)
+                iNaturalistDataIDs.append(newEntry["id"])
 
-        csvfile.close()
+            csvfile.close()
 
 totalEntryCount = len(iNaturalistData)
 print("Read " + str(totalEntryCount) + " iNaturalist entries that include location data and are not captive plants.")
