@@ -41,7 +41,7 @@ The Python3 script requires, in addition to a normal Python3 installation, sever
 * ```numpy```
 * ```powerlaw```
 
-Install them using ```pip3 install [package]``` or the respective alternative for your version of Python.
+Install them using ```pip3 install [package]``` or the respective alternative for your installation of Python 3.
 
 For some functions (but not in the default configuration), the script also needs to be able to call some external programs to do some of the data conversions. In particular:
 * ```gpsbabel```: https://www.gpsbabel.org/
@@ -54,6 +54,11 @@ For the default configuration, please go to [the iNaturalist export page (may re
 
 ## Configuration
 To configure the script, adjust the flags ```create*``` at the top of the script as needed (but the script runs with the default configuration out of the box). 
+
+## Running the script
+```
+python3 _inaturalist.py
+```
 
 ## Files produced
 The script produces the visual representations of Fig. 17, 20, 34–36, and 68–72 of the paper (adjusted to the newly downloaded data). The Motion Plausibility Profiles are separated into the main representation and the respective histogram in two files.
