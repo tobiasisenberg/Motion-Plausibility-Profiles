@@ -7,7 +7,7 @@ Tobias Isenberg, Zujany Salazar, Rafael Blanco, and Catherine Plaisant (2022). D
 
 ## Bibtex
 ```@ARTICLE{Isenberg:2022:DYB,
-  author      = {Tobias Isenberg and Zujany Salazar and  Rafael Blanco and  Catherine Plaisant},
+  author      = {Tobias Isenberg and Zujany Salazar and Rafael Blanco and Catherine Plaisant},
   title       = {Do You Believe Your (Social Media) Data? A Personal Story on Location Data Biases, Errors, and Plausibility as well as their Visualization},
   journal     = {IEEE Transactions on Visualization and Computer Graphics},
   year        = {2022},
