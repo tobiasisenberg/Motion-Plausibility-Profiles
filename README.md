@@ -64,4 +64,4 @@ python3 _inaturalist.py
 Note that it is normal to see many lines along the lines of ```No genus name for id: XXXXXXXXX ; scientific name: Abcdefghijk```, this is due to some observations in the data having been entered with only the family name, not the full scientific name. These entries have to be treated differently for the visualization (as explained in the paper).
 
 ## Files produced
-The script produces the visual representations of Fig. 17, 20, 34–36, and 68–72 of the paper (adjusted to the newly downloaded data). The Motion Plausibility Profiles are separated into the main representation and the respective histogram in two files.
+The script produces the visual representations of Fig. 17, 20, 34–36, and 68–72 of the paper (but adjusted to the newly downloaded data). The Motion Plausibility Profiles are separated into the main representation (```*.pdf```) and the respective histogram (```*-histogram.pdf```), i.e., in two separate files. Also, the script produces two versions of the main representation, one more squarish one (```*.pdf```) and one with a more landscape format (```*-wide.pdf```).
