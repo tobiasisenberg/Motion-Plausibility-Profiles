@@ -41,6 +41,7 @@ The Python3 script requires, in addition to a normal Python3 installation, sever
 * ```matplotlib```
 * ```numpy```
 * ```powerlaw```
+* ```kaleido```
 
 Install them using ```pip3 install [package]``` or the respective alternative for your installation of Python 3.
 
