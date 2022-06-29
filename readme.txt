@@ -41,6 +41,7 @@ The Python3 script requires, in addition to a normal Python3 installation, sever
 * matplotlib
 * numpy
 * powerlaw
+* kaleido
 Install them using "pip3 install [package]" or the respective alternative for your version of Python.
 
 For some functions, the script also needs to be able to call some external programs to do some of the data conversions. In particular:
@@ -51,12 +52,19 @@ Data Requirements:
 ==================
 The script requires additional CSV data files (named as specified in the familyFiles list in the script) downloaded from https://www.inaturalist.org/observations/export (if using different files you need to adjust the familyFiles list).
 
-For the default configuration, please go to the iNaturalist export page (https://www.inaturalist.org/observations/export ; may require an iNaturalist login) and download the data files for the taxa droseraceae, nepenthaceae, sarraceniaceae, roridulaceae, byblidaceae, lentibulariaceae, cephalotaceae, and drosophyllaceae. To do so, for each taxon enter the taxon name into the taxon field on the form, select the suggested family in the pop-up that appears, select All for Geo and for Taxon under Point 3 (Choose columns), and then click the Create export button at the bottom of the page. Each export can take a while to generate based on the size of the family (e.g., families droseraceae, nepenthaceae, sarraceniaceae, and lentibulariaceae are large and can take several hours each) and you can see the status at the bottom of the export page if you reload it (ask iNaturalist to send you an e-mail with the data once the export is complete). Also note that you can only create one export at a time. Once downloaded, unzip the data and rename the exported observations-123456.csv (or similar) files from iNaturalist to family.csv for easier association and to match the name in the script (e.g., droseraceae.csv).
+For the default configuration, please go to the iNaturalist export page (https://www.inaturalist.org/observations/export ; may require an iNaturalist login) and download the data files for the taxa droseraceae, nepenthaceae, sarraceniaceae, roridulaceae, byblidaceae, lentibulariaceae, cephalotaceae, and drosophyllaceae. To do so, for each taxon, enter the taxon name into the taxon field on the form, select the suggested family in the pop-up that appears, select All for Geo and for Taxon under Point 3 (Choose columns), and then click the Create export button at the bottom of the page. Each export can take a while to generate based on the size of the family (e.g., families droseraceae, nepenthaceae, sarraceniaceae, and lentibulariaceae are large and can take several hours each) and you can see the status at the bottom of the export page if you reload it (ask iNaturalist to send you an e-mail with the data once the export is complete). Also note that you can only create one export at a time. Once downloaded, unzip the data and rename the exported observations-123456.csv (or similar) files from iNaturalist to family.csv for easier association and to match the name in the script (e.g., droseraceae.csv). Note that only with data files present for all families mentioned above the produced results will be appropriate and similar to those in the paper.
 
 Configuration:
 ==============
 To configure the script, adjust the flags create* at the top of the script as needed (but the script runs with the default configuration out of the box).
 
+Running the script:
+===================
+
+python3 _inaturalist.py
+
+Note that it is normal to see many lines along the lines of No genus name for id: XXXXXXXXX ; scientific name: Abcdefghijk, this is due to some observations in the data having been entered with only the family name, not the full scientific name. These entries have to be treated differently for the visualization (as explained in the paper).
+
 Files produced:
 ===============
-The script produces the visual representations of Fig. 17, 20, 34--36, 68--72. The Motion Plausibility Profiles are separated into the main representation and the respective histogram in two files.
+The script produces the visual representations of Fig. 17, 20, 34–36, and 68–72 of the paper (but adjusted to the newly downloaded data). The Motion Plausibility Profiles are separated into the main representation (*.pdf) and the respective histogram (*-histogram.pdf), i.e., in two separate files. Also, the script produces two versions of the main representation, one more squarish one (*.pdf) and one with a more landscape format (*-wide.pdf).

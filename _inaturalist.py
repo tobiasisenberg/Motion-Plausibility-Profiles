@@ -234,7 +234,8 @@ for dataFile in familyFiles:
                     else:
                         # and ignore the rest
                         print("No genus name for id: " + str(newEntry["id"]), end='')
-                        print(" ; scientific name: " + newEntry["scientific_name"])
+                        print(" ; scientific name: " + newEntry["scientific_name"], end='')
+                        print(" (due to incomplete data; this is not an error but just FYI)")
                         continue
 
                 # make noise if we have obscured data and private location (for FIXME below)
@@ -677,7 +678,7 @@ if createDataExportForVisTool:
 ############################################
 if createGeneralVisualizations:
     print ("\nGenerating visualization")
-    os.makedirs(pathOfTheScript + "\\vis", exist_ok=True)
+    os.makedirs(pathOfTheScript + os.sep + "vis", exist_ok=True)
 
     # find information about people and their postings
     print ("Collecting information about people's posts counts (incl. sorting, may take a bit)")
@@ -743,7 +744,7 @@ if createGeneralVisualizations:
         font=dict(size = 4)
     )
     fig = go.Figure(data=data, layout=layout)
-    py.plot(fig, filename='vis\\0_iNaturalist-species-count-alphabetical.html', auto_open=False, show_link=False)
+    py.plot(fig, filename='vis' + os.sep + '0_iNaturalist-species-count-alphabetical.html', auto_open=False, show_link=False)
     layout = go.Layout(
         width = 1200,
         height = 1600,
@@ -779,7 +780,7 @@ if createGeneralVisualizations:
         ))
     layout['annotations'] = annotations
     fig = go.Figure(data=data, layout=layout)
-    pio.write_image(fig, 'vis/0_iNaturalist-species-count-alphabetical.pdf')
+    pio.write_image(fig, 'vis' + os.sep + '0_iNaturalist-species-count-alphabetical.pdf')
 
     ##################################
     # create visualization of species counts (rank)
@@ -813,7 +814,7 @@ if createGeneralVisualizations:
         font = dict(size=4)
     )
     fig = go.Figure(data=data, layout=layout)
-    py.plot(fig, filename='vis\\0_iNaturalist-species-count-rank.html', auto_open=False, show_link=False)
+    py.plot(fig, filename='vis' + os.sep + '0_iNaturalist-species-count-rank.html', auto_open=False, show_link=False)
     layout = go.Layout(
         width = 1200,
         height = 1600,
@@ -849,7 +850,7 @@ if createGeneralVisualizations:
         ))
     layout['annotations'] = annotations
     fig = go.Figure(data=data, layout=layout)
-    pio.write_image(fig, 'vis/0_iNaturalist-species-count-rank.pdf')
+    pio.write_image(fig, 'vis' + os.sep + '0_iNaturalist-species-count-rank.pdf')
 
     ##################################
     # the power-law plot for the species
@@ -891,7 +892,7 @@ if createGeneralVisualizations:
         font = dict(size=4)
     )
     fig = go.Figure(data=data, layout=layout)
-    py.plot(fig, filename='vis\\0_iNaturalist-species-count-distribution.html', auto_open=False, show_link=False)
+    py.plot(fig, filename='vis' + os.sep + '0_iNaturalist-species-count-distribution.html', auto_open=False, show_link=False)
     layout = go.Layout(
         width = 1300,
         height = 1200,
@@ -926,7 +927,7 @@ if createGeneralVisualizations:
     fig = go.Figure(data=data, layout=layout)
     # fig.update_xaxes(showline=True, linewidth=2, linecolor='black')
     # fig.update_yaxes(showline=True, linewidth=2, linecolor='black')
-    pio.write_image(fig, 'vis/0_iNaturalist-species-count-distribution.pdf')
+    pio.write_image(fig, 'vis' + os.sep + '0_iNaturalist-species-count-distribution.pdf')
 
     ##################################
     # create visualization of people's post counts (rank)
@@ -1025,7 +1026,7 @@ if createGeneralVisualizations:
         font = dict(size=3)
     )
     fig = go.Figure(data=data, layout=layout)
-    py.plot(fig, filename='vis\\0_iNaturalist-people-post-count-rank-top.html', auto_open=False, show_link=False)
+    py.plot(fig, filename='vis' + os.sep + '0_iNaturalist-people-post-count-rank-top.html', auto_open=False, show_link=False)
     layout = go.Layout(
         width = 1200,
         height = 1600,
@@ -1060,7 +1061,7 @@ if createGeneralVisualizations:
         ))
     layout['annotations'] = annotations
     fig = go.Figure(data=data, layout=layout)
-    pio.write_image(fig, 'vis/0_iNaturalist-people-post-count-rank-top.pdf')
+    pio.write_image(fig, 'vis' + os.sep + '0_iNaturalist-people-post-count-rank-top.pdf')
 
     ##################################
     # the power-law plot for all people
@@ -1078,7 +1079,7 @@ if createGeneralVisualizations:
         font = dict(size=4)
     )
     fig = go.Figure(data=data, layout=layout)
-    py.plot(fig, filename='vis\\0_iNaturalist-people-post-count-distribution.html', auto_open=False, show_link=False)
+    py.plot(fig, filename='vis' + os.sep + '0_iNaturalist-people-post-count-distribution.html', auto_open=False, show_link=False)
     layout = go.Layout(
         width = 1300,
         height = 1200,
@@ -1108,7 +1109,7 @@ if createGeneralVisualizations:
     fig = go.Figure(data=data, layout=layout)
     # fig.update_xaxes(showline=True, linewidth=2, linecolor='black')
     # fig.update_yaxes(showline=True, linewidth=2, linecolor='black')
-    pio.write_image(fig, 'vis/0_iNaturalist-people-post-count-distribution.pdf')
+    pio.write_image(fig, 'vis' + os.sep + '0_iNaturalist-people-post-count-distribution.pdf')
 
     ##################################
     # the bar graph of the all people
@@ -1126,7 +1127,7 @@ if createGeneralVisualizations:
         font = dict(size=4)
     )
     fig = go.Figure(data=data, layout=layout)
-    py.plot(fig, filename='vis\\0_iNaturalist-people-post-count-rank.html', auto_open=False, show_link=False)
+    py.plot(fig, filename='vis' + os.sep + '0_iNaturalist-people-post-count-rank.html', auto_open=False, show_link=False)
     layout = go.Layout(
         width = 1200,
         height = 1600,
@@ -1163,7 +1164,7 @@ if createGeneralVisualizations:
         ))
     layout['annotations'] = annotations
     fig = go.Figure(data=data, layout=layout)
-    pio.write_image(fig, 'vis/0_iNaturalist-people-post-count-rank.pdf')
+    pio.write_image(fig, 'vis' + os.sep + '0_iNaturalist-people-post-count-rank.pdf')
 
 ##################################
 # create person excerpts
@@ -1504,7 +1505,7 @@ if createPersonVisualizationExcerpts:
             layout['shapes'] = shapeList
 
             fig = go.Figure(data=data, layout=layout)
-            pio.write_image(fig, 'vis/0_people-moves-iNaturalist_' + str(rankCounter).zfill(2) + "_" + personLabel.replace('@', '_') + '.pdf')
+            pio.write_image(fig, 'vis' + os.sep + '0_people-moves-iNaturalist_' + str(rankCounter).zfill(2) + "_" + personLabel.replace('@', '_') + '.pdf')
 
             if createPersonVisualizationExcerptsWide:
                 # wide layout for the visualization, make it take less vertical space
@@ -1538,7 +1539,7 @@ if createPersonVisualizationExcerpts:
                 layout['shapes'] = shapeList
 
                 fig = go.Figure(data=data, layout=layout)
-                pio.write_image(fig, 'vis/0_people-moves-iNaturalist_' + str(rankCounter).zfill(2) + "_" + personLabel.replace('@', '_') + '-wide.pdf')
+                pio.write_image(fig, 'vis' + os.sep + '0_people-moves-iNaturalist_' + str(rankCounter).zfill(2) + "_" + personLabel.replace('@', '_') + '-wide.pdf')
 
             if createPersonVisualizationExcerptsHistograms:
                 sumOfEntries = counterObservationsPrecise + counterObservationsObscured
@@ -1700,6 +1701,6 @@ if createPersonVisualizationExcerpts:
 
                 fig = go.Figure(data=data, layout=layout)
                 # fig.update_xaxes(showticklabels=False)
-                pio.write_image(fig, 'vis/0_people-moves-iNaturalist_' + str(rankCounter).zfill(2) + "_" + personLabel.replace('@', '_') + '-histogram.pdf')
+                pio.write_image(fig, 'vis' + os.sep + '0_people-moves-iNaturalist_' + str(rankCounter).zfill(2) + "_" + personLabel.replace('@', '_') + '-histogram.pdf')
 
     outfile.close()
