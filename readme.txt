@@ -6,18 +6,22 @@ Tobias Isenberg, Zujany Salazar, Rafael Blanco, and Catherine Plaisant (2022). D
 
 Bibtex:
 =======
-@ARTICLE{Isenberg:2022:DYB,
-  author      = {Tobias Isenberg and Zujany Salazar and  Rafael Blanco and  Catherine Plaisant},
-  title       = {Do You Believe Your (Social Media) Data? A Personal Story on Location Data Biases, Errors, and Plausibility as well as their Visualization},
+@article{Isenberg:2022:DYB,
+  author      = {Tobias Isenberg and Zujany Salazar and Rafael Blanco and Catherine Plaisant},
+  title       = {Do You Believe Your (Social Media) Data? {A} Personal Story on Location Data Biases, Errors, and Plausibility as well as their Visualization},
   journal     = {IEEE Transactions on Visualization and Computer Graphics},
   year        = {2022},
+  volume      = {28},
+  number      = {9},
+  month       = sep,
+  pages       = {3277--3291},
   doi         = {10.1109/TVCG.2022.3141605},
   doi_url     = {https://doi.org/10.1109/TVCG.2022.3141605},
   oa_hal_url  = {https://hal.inria.fr/hal-03516682},
   osf_url     = {https://osf.io/u8ejr/},
   url         = {https://tobias.isenberg.cc/VideosAndDemos/Isenberg2022DYB},
+  github_url  = {https://github.com/tobiasisenberg/Motion-Plausibility-Profiles},
   pdf         = {https://tobias.isenberg.cc/personal/papers/Isenberg_2022_DYB.pdf},
-  note        = {To appear},
 }
 
 Project website:
