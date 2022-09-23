@@ -238,12 +238,13 @@ for dataFile in familyFiles:
                         print(" (due to incomplete data; this is not an error but just FYI)")
                         continue
 
-                # make noise if we have obscured data and private location (for FIXME below)
-                if createDataExportForVisTool:
-                    if 'private_latitude' in newEntry.keys():
-                        print("++++ FOUND PRIVATE DATA ++++")
-                        if newEntry["coordinates_obscured"] == "true":
-                            print("++++ COORDINATES STILL MARKED AS OBSCURED, fix FIXME in clean data export ++++")
+                # # make noise if we have obscured data and private location
+                # # this was for debugging only; this happens if we have special access to the data for some people
+                # # then we may have access to the private data despite the data being publically obscured
+                # if createDataExportForVisTool:
+                #     if ('private_latitude' in newEntry.keys()) and (len(str(newEntry['private_latitude'])) > 0) and (newEntry["coordinates_obscured"] == "true"):
+                #         print("++++ PRIVATE DATA BUT COORD. STILL MARKED AS OBSCURED, fix FIXME in clean data export ++++ -> priv lat: " + str(newEntry['private_latitude']) + " priv lon: " + str(newEntry['private_longitude']))
+                #         print("  -> " + newEntry["id"] + ";" + newEntry["scientific_name"])
 
                 # add the new observation to our local list
                 iNaturalistData.append(newEntry)
@@ -568,24 +569,56 @@ if createDataExportForHeatmap:
         outfile.close()
 
 ############################################
-# data export for GPT tools
+# data export for GPS tools
 ############################################
 if createDataExportForGPSTools:
-    with open('inaturalist_data_clean.gpx', 'w') as outfile:
+    with open('inaturalist_data_clean_precise.gpx', 'w') as outfile:
         outfile.write('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx version=\"1.1\" creator=\"Manual\" xmlns=\"http://www.topografix.com/GPX/1/1\" xmlns:gpxx=\"http://www.garmin.com/xmlschemas/GpxExtensions/v3\" xmlns:gpxtpx=\"http://www.garmin.com/xmlschemas/TrackPointExtension/v1\">\n')
         for location in iNaturalistData:
-            if location['coordinates_obscured'] == "false":
-                # we use the private data if we have it (empty if we have no access)
+            if (location['coordinates_obscured'] == "false") or (len(str(location['private_latitude'])) > 0):
+                # we use the private data if we have it (they are empty if we have no access)
                 outfile.write("  <wpt lat=\"")
-                if 'private_latitude' in location.keys():
+                if ('private_latitude' in location.keys()) and (len(str(location['private_latitude'])) > 0):
                     outfile.write(str(location['private_latitude']))
                 else:
                     outfile.write(str(location['latitude']))
                 outfile.write("\" lon=\"")
-                if 'private_longitude' in location.keys():
+                if ('private_longitude' in location.keys()) and (len(str(location['private_longitude'])) > 0):
                     outfile.write(str(location['private_longitude']))
                 else:
                     outfile.write(str(location['longitude']))
+                outfile.write("\">\n")
+                outfile.write("    <ele>0.000000</ele>\n") # FIXME: maybe add elevation data from public data later
+
+                speciesName = ""
+                hybrid = 0
+                if location['taxon_hybrid_name'] != "":
+                    speciesName = "x " + location['taxon_hybrid_name'].split(' ')[-1]
+                    hybrid = 1
+                else:
+                    if ' ' in location['taxon_species_name']:
+                        speciesName = location['taxon_species_name'].split(' ')[1]
+
+                outfile.write("    <name>"+location['taxon_genus_name']+" "+speciesName+"</name>\n")
+                outfile.write("    <cmt>"+location['taxon_genus_name']+" "+speciesName+"</cmt>\n") # "+location.encode('utf-8','replace').decode('utf-8')+" 
+                outfile.write("    <desc>"+location['taxon_genus_name']+" "+speciesName+"</desc>\n") #"+location+" 
+                outfile.write("    <cmt></cmt>\n") # "+location.encode('utf-8','replace').decode('utf-8')+" 
+                outfile.write("    <desc></desc>\n") #"+location+" 
+                outfile.write("  </wpt>\n")
+        outfile.write('</gpx>\n')
+        outfile.close()			
+    call(["gpsbabel", "-i", "gpx,gpxver=1.1,garminextensions", "-f", "inaturalist_data_clean_precise.gpx", "-o", "kml", "-F", "inaturalist_data_clean_precise.kml"])
+    call(["zip", "inaturalist_data_clean_precise.kmz", "inaturalist_data_clean_precise.kml"])
+
+    with open('inaturalist_data_clean_obscured.gpx', 'w') as outfile:
+        outfile.write('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx version=\"1.1\" creator=\"Manual\" xmlns=\"http://www.topografix.com/GPX/1/1\" xmlns:gpxx=\"http://www.garmin.com/xmlschemas/GpxExtensions/v3\" xmlns:gpxtpx=\"http://www.garmin.com/xmlschemas/TrackPointExtension/v1\">\n')
+        for location in iNaturalistData:
+            if (location['coordinates_obscured'] == "true") and (len(str(location['private_latitude'])) == 0):
+                # we use the private data if we have it (empty if we have no access)
+                outfile.write("  <wpt lat=\"")
+                outfile.write(str(location['latitude']))
+                outfile.write("\" lon=\"")
+                outfile.write(str(location['longitude']))
                 outfile.write("\">\n")
                 outfile.write("    <ele>0.000000</ele>\n")
 
@@ -606,8 +639,8 @@ if createDataExportForGPSTools:
                 outfile.write("  </wpt>\n")
         outfile.write('</gpx>\n')
         outfile.close()			
-    call(["gpsbabel", "-i", "gpx,gpxver=1.1,garminextensions", "-f", "inaturalist_data_clean.gpx", "-o", "kml", "-F", "inaturalist_data_clean.kml"])
-    call(["zip", "inaturalist_data_clean.kmz", "inaturalist_data_clean.kml"])
+    call(["gpsbabel", "-i", "gpx,gpxver=1.1,garminextensions", "-f", "inaturalist_data_clean_obscured.gpx", "-o", "kml", "-F", "inaturalist_data_clean_obscured.kml"])
+    call(["zip", "inaturalist_data_clean_obscured.kmz", "inaturalist_data_clean_obscured.kml"])
 
 ############################################
 # data export for web tool
@@ -618,22 +651,28 @@ if createDataExportForVisTool:
         for location in iNaturalistData:
             outfile.write(str(location['id']))
 
-            # FIXME: still need to check the situation if we have private location data
-            if (location['coordinates_obscured'] == "true"):
-                outfile.write(",in-obscured")
-            else:
+            # we use the private data if we have it (it is empty if we have no access)
+            if ('private_latitude' in location.keys()) and (len(str(location['private_latitude'])) > 0):
                 outfile.write(",in-precise")
-
-            # we use the private data if we have it (empty if we have no access)
-            if 'private_latitude' in location.keys():
                 outfile.write(","+str(location['private_latitude']))
             else:
+                if (location['coordinates_obscured'] == "true"):
+                    outfile.write(",in-obscured")
+                else:
+                    outfile.write(",in-precise")
                 outfile.write(","+str(location['latitude']))
-            if 'private_longitude' in location.keys():
+
+            if ('private_longitude' in location.keys()) and (len(str(location['private_longitude'])) > 0):
+                outfile.write(",in-precise")
                 outfile.write(","+str(location['private_longitude']))
             else:
+                if (location['coordinates_obscured'] == "true"):
+                    outfile.write(",in-obscured")
+                else:
+                    outfile.write(",in-precise")
                 outfile.write(","+str(location['longitude']))
-            outfile.write(",") # no elevation data yet, will add later
+
+            outfile.write(",") # no elevation data yet, will maybe add later (FIXME)
             
             outfile.write(","+location['taxon_genus_name'])
 
