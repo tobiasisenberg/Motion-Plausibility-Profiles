@@ -17,6 +17,7 @@ Tobias Isenberg, Zujany Salazar, Rafael Blanco, and Catherine Plaisant (2022). D
   month       = sep,
   pages       = {3277--3291},
   doi         = {10.1109/TVCG.2022.3141605},
+  shortdoi    = {10/kt4c},
   doi_url     = {https://doi.org/10.1109/TVCG.2022.3141605},
   oa_hal_url  = {https://hal.inria.fr/hal-03516682},
   osf_url     = {https://osf.io/u8ejr/},
