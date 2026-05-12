@@ -71,8 +71,9 @@ python3 _inaturalist.py
 Note that it is normal to see many lines along the lines of ```No genus name for id: XXXXXXXXX ; scientific name: Abcdefghijk```, this is due to some observations in the data having been entered with only the family name, not the full scientific name. These entries have to be treated differently for the visualization (as explained in the paper).
 
 ## Running the interactive visualisation
+Once you ran the script (which can take some time depending on the size of your dataset), you can open the interactive visualisation of the dataset.
 ```
-python3 -m http.server 8000 # or any other available port
+python3 open_visualization.py
 ```
 Then you can open in your browser the following url :
 ```

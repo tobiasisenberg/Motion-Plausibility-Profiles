@@ -109,7 +109,6 @@ numberOfPrivateObservations = 0
 numberOfPrivateObservationsWoGeo = 0
 
 for dataFile in familyFiles:
-    if skip_parsing: break
     dataFileName = "Observations/" + dataFile + ".csv"
     if os.path.isfile(dataFileName):
         with open(dataFileName, 'r', encoding='utf-8') as csvfile:
@@ -1022,7 +1021,7 @@ if createGeneralVisualizations:
 
     print("The most frequent posters are (at least 80 posts):")
     for peoplePosting, postCountCount in sortedPeopleAndPictureCount[::-1]:
-        if postCountCount >= 80:
+        if postCountCount >= 5:
             print("     " + peoplePosting + ": " + str(postCountCount))
             if createPersonVisualizationExcerptsWithPredefinedList == False:
                 peopleExcerptPlots.append(peoplePosting.split("-")[0])

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Motion Plausibility Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div id="header">
+        <select name="users" id="user-select">
+            <option value="">--Please choose a user--</option>
+        </select>
+        <div id="toggles-container">
+            <label id="toggle-container">
+                <input type="checkbox" id="animate-path"> Animate Route Progressively
+            </label>
+            <label id="toggle-container" style="margin-left: 15px;">
+                <input type="checkbox" id="colorblind-toggle"> Color Deficient Mode
+            </label>
+        </div>
+
+    </div>
+    <div id="content-split">
+        <div id="map"></div>
+        <div id="resizer">
+            <button id="toggle-profile" onclick="toggleProfile()">▶</button>
+        </div>
+        <div id="chart-container">
+            <div id="mppPlotly"></div>
+        </div>
+    </div>
+    <div id="timeline-container">
+        <div id="timeline-controls" style="padding: 5px 15px; display: flex; align-items: center;">
+            <label for="timeline-mode"
+                style="color: white; font-family: sans-serif; font-size: 14px; margin-right: 10px;">Resolution:</label>
+            <select id="timeline-mode"
+                style="background:#444; color:white; border:1px solid #666; padding:4px 8px; border-radius:4px; font-family: sans-serif; cursor: pointer;">
+                <option value="day">Day</option>
+                <option value="month">Month</option>
+                <option value="year">Year</option>
+                <option value="smart">Smart Periods</option>
+            </select>
+        </div>
+        <ul id="timeline"></ul>
+    </div>
+</body>
+
+</html>
